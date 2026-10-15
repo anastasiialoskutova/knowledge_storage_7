@@ -1,0 +1,7 @@
+# CQ-02: Знайти товари категорії Electronics
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?product ?productName WHERE {
+    ?product a :Product ;
+             :productName ?productName ;
+             :belongsToCategory :category01 .
+}

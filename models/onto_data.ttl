@@ -1,0 +1,252 @@
+@prefix : <http://example.org/ecommerce-recommendations#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ==========================================
+# 1. CUSTOMERS AND THEIR PROFILES
+# ==========================================
+
+:customer01 a :Customer ;
+    rdfs:label "Customer 01"@en ;
+    :customerId "C001" ;
+    :email "customer01@example.com" ;
+    :registrationDate "2025-01-10" ;
+    :hasProfile :profile01 ;
+    :hasPurchaseHistory :history01 ;
+    :assignedToSegment :segment01 .
+
+:customer02 a :Customer ;
+    rdfs:label "Customer 02"@en ;
+    :customerId "C002" ;
+    :email "customer02@example.com" ;
+    :registrationDate "2025-01-10" ;
+    :hasProfile :profile02 ;
+    :hasPurchaseHistory :history02 ;
+    :assignedToSegment :segment02 .
+
+:customer03 a :Customer ;
+    rdfs:label "Customer 03"@en ;
+    :customerId "C003" ;
+    :email "customer03@example.com" ;
+    :registrationDate "2025-01-10" ;
+    :hasProfile :profile03 ;
+    :hasPurchaseHistory :history03 ;
+    :assignedToSegment :segment03 .
+
+:customer04 a :Customer ;
+    rdfs:label "Customer 04"@en ;
+    :customerId "C004" ;
+    :email "customer04@example.com" ;
+    :registrationDate "2025-01-10" ;
+    :hasProfile :profile04 ;
+    :hasPurchaseHistory :history04 ;
+    :assignedToSegment :segment04 .
+
+:customer05 a :Customer ;
+    rdfs:label "Customer 05"@en ;
+    :customerId "C005" ;
+    :email "customer05@example.com" ;
+    :registrationDate "2025-01-10" ;
+    :hasProfile :profile05 ;
+    :hasPurchaseHistory :history05 ;
+    :assignedToSegment :segment05 .
+
+:profile01 a :CustomerProfile ; rdfs:label "Profile 01"@en ; :hasBehaviorFeature :feature01, :feature02 .
+:profile02 a :CustomerProfile ; rdfs:label "Profile 02"@en ; :hasBehaviorFeature :feature02, :feature03 .
+:profile03 a :CustomerProfile ; rdfs:label "Profile 03"@en ; :hasBehaviorFeature :feature03, :feature04 .
+:profile04 a :CustomerProfile ; rdfs:label "Profile 04"@en ; :hasBehaviorFeature :feature04, :feature05 .
+:profile05 a :CustomerProfile ; rdfs:label "Profile 05"@en ; :hasBehaviorFeature :feature01, :feature05 .
+
+:history01 a :PurchaseHistory ; rdfs:label "Purchase history 01"@en .
+:history02 a :PurchaseHistory ; rdfs:label "Purchase history 02"@en .
+:history03 a :PurchaseHistory ; rdfs:label "Purchase history 03"@en .
+:history04 a :PurchaseHistory ; rdfs:label "Purchase history 04"@en .
+:history05 a :PurchaseHistory ; rdfs:label "Purchase history 05"@en .
+
+:segment01 a :CustomerSegment ; rdfs:label "Frequent buyers"@en .
+:segment02 a :CustomerSegment ; rdfs:label "Technology shoppers"@en .
+:segment03 a :CustomerSegment ; rdfs:label "Budget shoppers"@en .
+:segment04 a :CustomerSegment ; rdfs:label "Fashion shoppers"@en .
+:segment05 a :CustomerSegment ; rdfs:label "New customers"@en .
+
+:feature01 a :BehaviorFeature ; rdfs:label "Frequently views products"@en .
+:feature02 a :BehaviorFeature ; rdfs:label "Often purchases electronics"@en .
+:feature03 a :BehaviorFeature ; rdfs:label "Prefers discounted products"@en .
+:feature04 a :BehaviorFeature ; rdfs:label "Frequently uses search"@en .
+:feature05 a :BehaviorFeature ; rdfs:label "Returns to viewed products"@en .
+
+# ==========================================
+# 2. PRODUCT CATEGORIES AND BRANDS
+# ==========================================
+
+:category01 a :ProductCategory ; rdfs:label "Electronics"@en .
+:category02 a :ProductCategory ; rdfs:label "Home and lifestyle"@en ;
+    :hasParentCategory :category01 .
+:category03 a :ProductCategory ; rdfs:label "Accessories"@en ;
+    :hasParentCategory :category01 .
+
+:brand01 a :Brand ; rdfs:label "TechNova"@en .
+:brand02 a :Brand ; rdfs:label "HomePlus"@en .
+:brand03 a :Brand ; rdfs:label "StyleWorks"@en .
+
+# ==========================================
+# 3. PRODUCTS, OFFERS, PRICES AND INVENTORY
+# ==========================================
+
+:product01 a :Product ;
+    rdfs:label "Wireless headphones"@en ;
+    :productId "P001" ;
+    :productName "Wireless headphones" ;
+    :belongsToCategory :category01 ;
+    :hasBrand :brand01 ;
+    :hasOffer :offer01 ;
+    :hasInventory :inventory01 .
+
+:product02 a :Product ;
+    rdfs:label "Smart watch"@en ;
+    :productId "P002" ;
+    :productName "Smart watch" ;
+    :belongsToCategory :category01 ;
+    :hasBrand :brand01 ;
+    :hasOffer :offer02 ;
+    :hasInventory :inventory02 .
+
+:product03 a :Product ;
+    rdfs:label "Desk lamp"@en ;
+    :productId "P003" ;
+    :productName "Desk lamp" ;
+    :belongsToCategory :category02 ;
+    :hasBrand :brand02 ;
+    :hasOffer :offer03 ;
+    :hasInventory :inventory03 .
+
+:product04 a :Product ;
+    rdfs:label "Backpack"@en ;
+    :productId "P004" ;
+    :productName "Backpack" ;
+    :belongsToCategory :category03 ;
+    :hasBrand :brand03 ;
+    :hasOffer :offer04 ;
+    :hasInventory :inventory04 .
+
+:product05 a :Product ;
+    rdfs:label "Portable speaker"@en ;
+    :productId "P005" ;
+    :productName "Portable speaker" ;
+    :belongsToCategory :category01 ;
+    :hasBrand :brand01 ;
+    :hasOffer :offer05 ;
+    :hasInventory :inventory05 .
+
+:offer01 a :Offer ; rdfs:label "Offer for headphones"@en ; :hasPrice :price01 .
+:offer02 a :Offer ; rdfs:label "Offer for smart watch"@en ; :hasPrice :price02 .
+:offer03 a :Offer ; rdfs:label "Offer for desk lamp"@en ; :hasPrice :price03 .
+:offer04 a :Offer ; rdfs:label "Offer for backpack"@en ; :hasPrice :price04 .
+:offer05 a :Offer ; rdfs:label "Offer for speaker"@en ; :hasPrice :price05 .
+
+:price01 a :Price ; rdfs:label "Price 01"@en ; :priceAmount "79.99"^^xsd:decimal ; :currency "USD" .
+:price02 a :Price ; rdfs:label "Price 02"@en ; :priceAmount "129.99"^^xsd:decimal ; :currency "USD" .
+:price03 a :Price ; rdfs:label "Price 03"@en ; :priceAmount "34.50"^^xsd:decimal ; :currency "USD" .
+:price04 a :Price ; rdfs:label "Price 04"@en ; :priceAmount "49.00"^^xsd:decimal ; :currency "USD" .
+:price05 a :Price ; rdfs:label "Price 05"@en ; :priceAmount "59.99"^^xsd:decimal ; :currency "USD" .
+
+:inventory01 a :Inventory ; rdfs:label "Headphones inventory"@en ; :stockQuantity 25 .
+:inventory02 a :Inventory ; rdfs:label "Smart watch inventory"@en ; :stockQuantity 12 .
+:inventory03 a :Inventory ; rdfs:label "Desk lamp inventory"@en ; :stockQuantity 40 .
+:inventory04 a :Inventory ; rdfs:label "Backpack inventory"@en ; :stockQuantity 18 .
+:inventory05 a :Inventory ; rdfs:label "Speaker inventory"@en ; :stockQuantity 30 .
+
+# ==========================================
+# 4. PURCHASES AND PURCHASE ITEMS
+# ==========================================
+
+:purchase01 a :Purchase ; rdfs:label "Purchase 01"@en ; :containsItem :item01 .
+:purchase02 a :Purchase ; rdfs:label "Purchase 02"@en ; :containsItem :item02 .
+:purchase03 a :Purchase ; rdfs:label "Purchase 03"@en ; :containsItem :item03 .
+:purchase04 a :Purchase ; rdfs:label "Purchase 04"@en ; :containsItem :item04 .
+:purchase05 a :Purchase ; rdfs:label "Purchase 05"@en ; :containsItem :item05 .
+
+:item01 a :PurchaseItem ;
+    rdfs:label "Purchase item 01"@en ;
+    :partOfPurchase :purchase01 ;
+    :purchasedProduct :product01 ;
+    :quantity 1 .
+
+:item02 a :PurchaseItem ;
+    rdfs:label "Purchase item 02"@en ;
+    :partOfPurchase :purchase02 ;
+    :purchasedProduct :product02 ;
+    :quantity 1 .
+
+:item03 a :PurchaseItem ;
+    rdfs:label "Purchase item 03"@en ;
+    :partOfPurchase :purchase03 ;
+    :purchasedProduct :product03 ;
+    :quantity 2 .
+
+:item04 a :PurchaseItem ;
+    rdfs:label "Purchase item 04"@en ;
+    :partOfPurchase :purchase04 ;
+    :purchasedProduct :product04 ;
+    :quantity 1 .
+
+:item05 a :PurchaseItem ;
+    rdfs:label "Purchase item 05"@en ;
+    :partOfPurchase :purchase05 ;
+    :purchasedProduct :product05 ;
+    :quantity 1 .
+
+# ==========================================
+# 5. RECOMMENDATIONS AND RECOMMENDATION MODEL
+# ==========================================
+
+:model01 a :RecommendationModel ;
+    rdfs:label "Personalized recommendation model"@en ;
+    :modelVersion "1.0" .
+
+:score01 a :RelevanceScore ; rdfs:label "Relevance score 01"@en .
+:score02 a :RelevanceScore ; rdfs:label "Relevance score 02"@en .
+:score03 a :RelevanceScore ; rdfs:label "Relevance score 03"@en .
+:score04 a :RelevanceScore ; rdfs:label "Relevance score 04"@en .
+:score05 a :RelevanceScore ; rdfs:label "Relevance score 05"@en .
+
+:recommendation01 a :Recommendation ;
+    rdfs:label "Recommendation 01"@en ;
+    :generatedFor :customer01 ;
+    :recommendsProduct :product02 ;
+    :producedByModel :model01 ;
+    :hasRelevanceScore :score01 ;
+    :recommendationScore "0.95"^^xsd:decimal .
+
+:recommendation02 a :Recommendation ;
+    rdfs:label "Recommendation 02"@en ;
+    :generatedFor :customer02 ;
+    :recommendsProduct :product01 ;
+    :producedByModel :model01 ;
+    :hasRelevanceScore :score02 ;
+    :recommendationScore "0.91"^^xsd:decimal .
+
+:recommendation03 a :Recommendation ;
+    rdfs:label "Recommendation 03"@en ;
+    :generatedFor :customer03 ;
+    :recommendsProduct :product03 ;
+    :producedByModel :model01 ;
+    :hasRelevanceScore :score03 ;
+    :recommendationScore "0.87"^^xsd:decimal .
+
+:recommendation04 a :Recommendation ;
+    rdfs:label "Recommendation 04"@en ;
+    :generatedFor :customer04 ;
+    :recommendsProduct :product04 ;
+    :producedByModel :model01 ;
+    :hasRelevanceScore :score04 ;
+    :recommendationScore "0.89"^^xsd:decimal .
+
+:recommendation05 a :Recommendation ;
+    rdfs:label "Recommendation 05"@en ;
+    :generatedFor :customer05 ;
+    :recommendsProduct :product05 ;
+    :producedByModel :model01 ;
+    :hasRelevanceScore :score05 ;
+    :recommendationScore "0.84"^^xsd:decimal .

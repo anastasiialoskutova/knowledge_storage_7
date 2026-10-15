@@ -1,0 +1,8 @@
+# CQ-08: Знайти історію покупок та товари покупця C001
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?purchase ?productName WHERE {
+    ?customer :customerId "C001" ;
+              :hasPurchaseHistory ?history .
+    ?item :purchasedProduct ?product .
+    ?product :productName ?productName .
+}

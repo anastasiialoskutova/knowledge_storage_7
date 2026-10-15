@@ -1,0 +1,9 @@
+# CQ-07: Перевірити товари з оцінкою релевантності > 0.90
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?customer ?product ?score WHERE {
+    ?rec a :Recommendation ;
+         :generatedFor ?customer ;
+         :recommendsProduct ?product ;
+         :recommendationScore ?score .
+    FILTER(?score > 0.90)
+}

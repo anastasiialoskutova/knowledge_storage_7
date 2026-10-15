@@ -1,0 +1,15 @@
+PREFIX : <http://example.org/ecommerce-recommendations#>
+
+SELECT ?productId ?productName ?priceAmount ?currency ?stockQuantity WHERE {
+    ?product a :Product ;
+             :productId ?productId ;
+             :productName ?productName ;
+             :hasOffer ?offer ;
+             :hasInventory ?inventory .
+             
+    ?offer :hasPrice ?price .
+    ?price :priceAmount ?priceAmount ;
+           :currency ?currency .
+           
+    ?inventory :stockQuantity ?stockQuantity .
+}

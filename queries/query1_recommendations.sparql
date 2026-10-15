@@ -1,0 +1,16 @@
+PREFIX : <http://example.org/ecommerce-recommendations#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?customerId ?productName ?score ?modelId WHERE {
+    ?rec a :Recommendation ;
+         :generatedFor ?customer ;
+         :recommendsProduct ?product ;
+         :producedByModel ?model ;
+         :recommendationScore ?score .
+         
+    ?customer :customerId ?customerId .
+    ?product :productName ?productName .
+    ?model :modelVersion ?modelId .
+    
+    FILTER(?score > 0.90)
+}

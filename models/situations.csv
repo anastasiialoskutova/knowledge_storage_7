@@ -1,0 +1,6 @@
+"Situation_ID","Initial_State","Event","Guard_Condition","New_State","Action_Result"
+"SIT-01",":CustomerProfile / :Session",":ProductView",":Inventory (stock > 0) & :RelevanceScore (> 0.9)",":Recommendation",":RecommendationModel (generates personalized recommendation)"
+"SIT-02",":ShoppingCart",":CustomerActivity",":Inventory (stockQuantity >= requested)",":CartItem",":Offer (reserves price and updates cart)"
+"SIT-03",":ShoppingCart",":Order",":PaymentMethod (valid) & :Price (> 0)",":Order (pending payment)",":Payment (initiates payment transaction)"
+"SIT-04",":PurchaseHistory",":ProductRating",":ProductRating (1 <= value <= 5)",":Product (rated)",":ProductRating (recalculates product rating)"
+"SIT-05",":Price",":Discount",":Inventory (stock available) & :Discount (> 0%)",":Offer (discounted)",":Price (updates catalog price)"

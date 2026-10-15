@@ -1,0 +1,386 @@
+
+@prefix : <http://example.org/ecommerce-recommendations#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://example.org/ecommerce-recommendations>
+    a owl:Ontology ;
+    rdfs:label "E-commerce Recommendation Ontology"@en ;
+    rdfs:label "Онтологія рекомендацій для електронної комерції"@uk ;
+    rdfs:comment "Ontology of customers, products, purchases, financial transactions and personalized recommendations."@en ;
+    owl:versionInfo "1.0" .
+
+# 1. Classes and hierarchy
+
+:TopLevelEntity a owl:Class .
+:KnowledgeEntity a owl:Class ;
+    rdfs:subClassOf :TopLevelEntity .
+:Agent a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Customer a owl:Class ;
+    rdfs:subClassOf :Agent .
+:CustomerProfile a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:PurchaseHistory a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:CatalogEntity a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Product a owl:Class ;
+    rdfs:subClassOf :CatalogEntity ;
+    rdfs:seeAlso schema:Product ;
+    skos:closeMatch schema:Product .
+:ProductCategory a owl:Class ;
+    rdfs:subClassOf :CatalogEntity ;
+    skos:closeMatch schema:CategoryCode .
+:Brand a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity ;
+    skos:closeMatch schema:Brand .
+:ProductAttribute a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:FinancialValue a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Price a owl:Class ;
+    rdfs:subClassOf :FinancialValue .
+:CommercialEntity a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Offer a owl:Class ;
+    rdfs:subClassOf :CommercialEntity ;
+    skos:closeMatch schema:Offer .
+:BusinessEvent a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Purchase a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+:PurchaseItem a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Order a owl:Class ;
+    rdfs:subClassOf :BusinessEvent ;
+    skos:closeMatch schema:Order .
+:Payment a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+:PaymentMethod a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:CustomerActivity a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+:ShoppingCart a owl:Class ;
+    rdfs:subClassOf :CustomerActivity .
+:CartItem a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:UserInteraction a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+:ProductView a owl:Class ;
+    rdfs:subClassOf :UserInteraction ;
+    skos:closeMatch schema:ViewAction .
+:ProductClick a owl:Class ;
+    rdfs:subClassOf :UserInteraction .
+:UserFeedback a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+:ProductRating a owl:Class ;
+    rdfs:subClassOf :UserFeedback ;
+    skos:closeMatch schema:Rating .
+:ProductReview a owl:Class ;
+    rdfs:subClassOf :UserFeedback ;
+    skos:closeMatch schema:Review .
+:Recommendation a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:RecommendationList a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:RecommendationModel a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:SimilarityScore a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:RelevanceScore a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:CustomerSegment a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:BehaviorFeature a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Session a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Wishlist a owl:Class ;
+    rdfs:subClassOf :CustomerActivity .
+:Discount a owl:Class ;
+    rdfs:subClassOf :FinancialValue .
+:Inventory a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+:Return a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+:Refund a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+
+# 2. Disjointness axioms
+
+[] a owl:AllDisjointClasses ;
+   owl:members (
+      :Customer
+      :Product
+      :ProductCategory
+      :Brand
+      :Recommendation
+      :RecommendationModel
+   ) .
+
+[] a owl:AllDisjointClasses ;
+   owl:members (
+      :Purchase
+      :Order
+      :Payment
+      :UserInteraction
+      :ProductReview
+      :ProductRating
+   ) .
+
+[] a owl:AllDisjointClasses ;
+   owl:members (
+      :CustomerProfile
+      :PurchaseHistory
+      :ShoppingCart
+      :Wishlist
+      :Session
+   ) .
+
+# 3. Object properties
+
+:hasProfile a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :CustomerProfile .
+
+:hasPurchaseHistory a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :PurchaseHistory .
+
+:containsItem a owl:ObjectProperty ;
+    owl:inverseOf :partOfPurchase ;
+    rdfs:domain :Purchase ;
+    rdfs:range :PurchaseItem .
+
+:partOfPurchase a owl:ObjectProperty ;
+    rdfs:domain :PurchaseItem ;
+    rdfs:range :Purchase .
+
+:purchasedProduct a owl:ObjectProperty ;
+    rdfs:domain :PurchaseItem ;
+    rdfs:range :Product .
+
+:belongsToCategory a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :ProductCategory .
+
+:hasBrand a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :Brand .
+
+:hasAttribute a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :ProductAttribute .
+
+:hasOffer a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :Offer .
+
+:hasPrice a owl:ObjectProperty ;
+    rdfs:domain :Offer ;
+    rdfs:range :Price .
+
+:placedOrder a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :Order .
+
+:paidBy a owl:ObjectProperty ;
+    rdfs:domain :Order ;
+    rdfs:range :Payment .
+
+:usesPaymentMethod a owl:ObjectProperty ;
+    rdfs:domain :Payment ;
+    rdfs:range :PaymentMethod .
+
+:recommendsProduct a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :Product .
+
+:generatedFor a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :Customer .
+
+:producedByModel a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :RecommendationModel .
+
+:performedBy a owl:ObjectProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range :Customer .
+
+:interactionTarget a owl:ObjectProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range :Product .
+
+:hasRating a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :ProductRating .
+
+:writtenBy a owl:ObjectProperty ;
+    rdfs:domain :ProductReview ;
+    rdfs:range :Customer .
+
+:savedProduct a owl:ObjectProperty ;
+    rdfs:domain :Wishlist ;
+    rdfs:range :Product .
+
+:assignedToSegment a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :CustomerSegment .
+
+:hasBehaviorFeature a owl:ObjectProperty ;
+    rdfs:domain :CustomerProfile ;
+    rdfs:range :BehaviorFeature .
+
+:hasRelevanceScore a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :RelevanceScore .
+
+:hasInventory a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :Inventory .
+
+:hasDiscount a owl:ObjectProperty ;
+    rdfs:domain :Offer ;
+    rdfs:range :Discount .
+
+:resultedInRefund a owl:ObjectProperty ;
+    rdfs:domain :Return ;
+    rdfs:range :Refund .
+
+:hasParentCategory a owl:ObjectProperty,
+       owl:TransitiveProperty ;
+    rdfs:domain :ProductCategory ;
+    rdfs:range :ProductCategory ;
+    owl:inverseOf :hasChildCategory .
+
+:hasChildCategory a owl:ObjectProperty ;
+    rdfs:domain :ProductCategory ;
+    rdfs:range :ProductCategory .
+
+# 4. Data properties
+
+:customerId a owl:DatatypeProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:email a owl:DatatypeProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:registrationDate a owl:DatatypeProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:productId a owl:DatatypeProperty ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:productName a owl:DatatypeProperty ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:priceAmount a owl:DatatypeProperty ;
+    rdfs:domain :Price ;
+    rdfs:range xsd:decimal .
+
+:currency a owl:DatatypeProperty ;
+    rdfs:domain :Price ;
+    rdfs:range xsd:string .
+
+:quantity a owl:DatatypeProperty ;
+    rdfs:domain :PurchaseItem ;
+    rdfs:range xsd:integer .
+
+:interactionType a owl:DatatypeProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range xsd:string .
+
+:interactionTime a owl:DatatypeProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range xsd:dateTime .
+
+:ratingValue a owl:DatatypeProperty ;
+    rdfs:domain :ProductRating ;
+    rdfs:range xsd:decimal .
+
+:recommendationScore a owl:DatatypeProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range xsd:decimal .
+
+:modelVersion a owl:DatatypeProperty ;
+    rdfs:domain :RecommendationModel ;
+    rdfs:range xsd:string .
+
+:sessionStart a owl:DatatypeProperty ;
+    rdfs:domain :Session ;
+    rdfs:range xsd:dateTime .
+
+:sessionEnd a owl:DatatypeProperty ;
+    rdfs:domain :Session ;
+    rdfs:range xsd:dateTime .
+
+:discountPercent a owl:DatatypeProperty ;
+    rdfs:domain :Discount ;
+    rdfs:range xsd:decimal .
+
+:stockQuantity a owl:DatatypeProperty ;
+    rdfs:domain :Inventory ;
+    rdfs:range xsd:integer .
+
+:refundAmount a owl:DatatypeProperty ;
+    rdfs:domain :Refund ;
+    rdfs:range xsd:decimal .
+
+# 5. Existential and universal restrictions
+
+:Customer rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :hasProfile ;
+    owl:someValuesFrom :CustomerProfile
+] .
+
+:Purchase rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :containsItem ;
+    owl:someValuesFrom :PurchaseItem
+] .
+
+:Recommendation rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :recommendsProduct ;
+    owl:someValuesFrom :Product
+] .
+
+:Recommendation rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :recommendsProduct ;
+    owl:allValuesFrom :Product
+] .
+
+:Product rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :belongsToCategory ;
+    owl:allValuesFrom :ProductCategory
+] .
+
+# 6. Cardinality restrictions
+
+:Customer rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :hasProfile ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onClass :CustomerProfile
+] .
+
+:Recommendation rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :recommendsProduct ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onClass :Product
+] .

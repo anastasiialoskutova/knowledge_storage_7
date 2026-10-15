@@ -1,0 +1,5 @@
+# CQ-09: Знайти дочірні категорії через транзитивну властивість
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?childCategory WHERE {
+    ?childCategory :hasParentCategory :category01 .
+}

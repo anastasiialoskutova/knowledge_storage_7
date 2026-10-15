@@ -1,0 +1,9 @@
+# CQ-06: Знайти рекомендації моделі версії "1.0"
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?customer ?product WHERE {
+    ?rec a :Recommendation ;
+         :generatedFor ?customer ;
+         :recommendsProduct ?product ;
+         :producedByModel ?model .
+    ?model :modelVersion "1.0" .
+}

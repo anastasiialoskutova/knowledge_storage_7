@@ -1,0 +1,28 @@
+property_name;property_type;domain;range;characteristics
+hasProfile;object;Customer;Customer;Зв'язок клієнта з його профілем
+hasPurchaseHistory;object;Customer;PurchaseHistory;Історія покупок клієнта
+containsItem;object;Purchase;PurchaseItem;Покупка містить позиції
+purchasedProduct;object;PurchaseItem;Product;Товар у позиції покупки
+belongsToCategory;object;Product;ProductCategory;Товар належить до категорії
+hasBrand;object;Product;Brand;Товар має торгову марку
+hasOffer;object;Product;Offer;Товар має комерційну пропозицію
+hasPrice;object;Offer;Price;Пропозиція має ціну
+placedOrder;object;Customer;Order;Клієнт оформлює замовлення
+paidBy;object;Order;Payment;Замовлення оплачується платежем
+usesPaymentMethod;object;Payment;PaymentMethod;Платіж використовує спосіб оплати
+recommendsProduct;object;Recommendation;Product;Рекомендація пропонує товар
+generatedFor;object;Recommendation;Customer;Рекомендація призначена клієнту
+producedByModel;object;Recommendation;RecommendationModel;Модель формує рекомендацію
+performedBy;object;UserInteraction;Customer;Дія виконується клієнтом
+interactionTarget;object;UserInteraction;Product;Об'єкт взаємодії
+customerId;data;Customer;xsd:string;Унікальний ідентифікатор клієнта
+email;data;Customer;xsd:string;Електронна адреса клієнта
+registrationDate;data;Customer;xsd:date;Дата реєстрації
+productId;data;Product;xsd:string;Унікальний ідентифікатор товару
+productName;data;Product;xsd:string;Назва товару
+priceAmount;data;Price;xsd:decimal;Грошова сума не менша за нуль
+currency;data;Price;xsd:string;Код валюти наприклад UAH за ISO 4217
+quantity;data;PurchaseItem;xsd:integer;Кількість товару не менша за один
+interactionType;data;UserInteraction;xsd:string;Тип дії view click add_to_cart purchase
+ratingValue;data;ProductRating;xsd:decimal;Оцінка товару від 1 до 5
+recommendationScore;data;Recommendation;xsd:decimal;Релевантність рекомендації від 0 до 1

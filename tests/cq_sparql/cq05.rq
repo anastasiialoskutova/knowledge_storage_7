@@ -1,0 +1,9 @@
+# CQ-05: Отримати ціни товарів у валюті USD
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?productName ?priceAmount ?currency WHERE {
+    ?product :productName ?productName ;
+             :hasOffer ?offer .
+    ?offer :hasPrice ?price .
+    ?price :priceAmount ?priceAmount ;
+           :currency ?currency .
+}

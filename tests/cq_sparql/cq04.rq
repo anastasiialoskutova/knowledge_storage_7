@@ -1,0 +1,7 @@
+# CQ-04: Знайти залишки на складі для кожного товару
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?productName ?stockQuantity WHERE {
+    ?product :productName ?productName ;
+             :hasInventory ?inventory .
+    ?inventory :stockQuantity ?stockQuantity .
+}

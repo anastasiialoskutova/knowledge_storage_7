@@ -1,0 +1,7 @@
+# CQ-10: Знайти поведінкові особливості профілю покупця C001
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?featureLabel WHERE {
+    :customer01 :hasProfile ?profile .
+    ?profile :hasBehaviorFeature ?feature .
+    ?feature rdfs:label ?featureLabel .
+}

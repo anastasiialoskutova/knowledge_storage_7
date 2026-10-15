@@ -1,0 +1,37 @@
+class_name;definition_genus_differentia;parent_class;key_properties;source
+Customer;Особа яка взаємодіє з електронним магазином для перегляду або придбання товарів;Agent;customer_id email registration_date;Schema.org Person
+CustomerProfile;Структуроване представлення характеристик і вподобань клієнта для персоналізації рекомендацій;KnowledgeEntity;customer_id preferences segment;Власна модель
+PurchaseHistory;Набір записів про завершені покупки клієнта за певний період;KnowledgeEntity;customer purchases period;Власна модель
+Purchase;Подія придбання клієнтом товарів із фіксацією часу та вартості;BusinessEvent;purchase_id purchase_date total_amount;Schema.org Order
+PurchaseItem;Позиція покупки яка описує конкретний товар та його кількість у замовленні;KnowledgeEntity;product quantity unit_price;Schema.org OrderItem
+Product;Товар який електронний магазин пропонує для перегляду або придбання;CatalogEntity;product_id name price category;Schema.org Product
+ProductCategory;Категорія що об'єднує товари зі спільним призначенням або характеристиками;CatalogEntity;category_id name description;Schema.org CategoryCode
+Brand;Торгова марка під якою виробник або постачальник представляє товар;Organization;brand_id name;Schema.org Brand
+ProductAttribute;Характеристика що описує товар за певним параметром;KnowledgeEntity;attribute_name attribute_value;Schema.org PropertyValue
+Price;Грошове значення за яке товар пропонується клієнту;FinancialValue;amount currency;Schema.org PriceSpecification
+Offer;Комерційна пропозиція придбати товар за визначеною ціною та умовами;CommercialEntity;price availability validity_period;Schema.org Offer
+ShoppingCart;Набір товарів які клієнт відібрав для можливої покупки;CustomerActivity;customer items updated_at;Власна модель
+CartItem;Позиція кошика що визначає товар і його кількість;KnowledgeEntity;product quantity;Власна модель
+Order;Замовлення оформлене клієнтом для придбання товарів;BusinessEvent;order_id order_date status total_amount;Schema.org Order
+Payment;Фінансова операція з оплати оформленого замовлення;BusinessEvent;payment_id amount currency status;Schema.org PayAction
+PaymentMethod;Спосіб за допомогою якого клієнт оплачує замовлення;KnowledgeEntity;method_name method_type;Власна модель
+Recommendation;Результат роботи системи що пропонує клієнту товар на основі даних та персоналізації;SystemOutput;customer product score;Власна модель
+RecommendationList;Упорядкований набір товарних рекомендацій для певного клієнта;SystemOutput;customer products created_at;Власна модель
+RecommendationModel;Алгоритмічна модель яка обчислює релевантність товарів для клієнта;SoftwareEntity;model_name version algorithm;Власна модель
+UserInteraction;Зафіксована дія клієнта під час взаємодії з магазином або товаром;BusinessEvent;customer action_type timestamp;Schema.org Action
+ProductView;Подія перегляду клієнтом сторінки конкретного товару;UserInteraction;customer product viewed_at;Schema.org ViewAction
+ProductClick;Подія натискання клієнтом на картку або посилання товару;UserInteraction;customer product clicked_at;Schema.org ClickAction
+ProductRating;Числова оцінка товару яку залишив клієнт;UserFeedback;customer product rating_value;Schema.org Rating
+ProductReview;Текстовий відгук клієнта про товар або досвід його придбання;UserFeedback;customer product review_text;Schema.org Review
+Wishlist;Перелік товарів які клієнт зберіг для майбутнього перегляду або придбання;CustomerActivity;customer products updated_at;Власна модель
+Session;Обмежений у часі період активності клієнта на сайті або в застосунку;KnowledgeEntity;session_id started_at ended_at;Власна модель
+CustomerSegment;Група клієнтів зі спільними поведінковими або купівельними характеристиками;KnowledgeEntity;segment_name criteria;Власна модель
+BehaviorFeature;Ознака обчислена з дій клієнта для аналізу його поведінки;KnowledgeEntity;feature_name feature_value period;Власна модель
+SimilarityScore;Числова міра подібності між двома клієнтами або товарами за вибраними ознаками;KnowledgeEntity;score method;Власна модель
+RelevanceScore;Числова оцінка відповідності товару потребам конкретного клієнта;KnowledgeEntity;score calculation_method;Власна модель
+Discount;Зменшення стандартної ціни товару на визначену суму або відсоток;FinancialValue;discount_value discount_type;Schema.org Offer
+Inventory;Облік кількості товарів доступних для продажу;KnowledgeEntity;product quantity location;Власна модель
+Return;Подія повернення клієнтом раніше придбаного товару;BusinessEvent;purchase product reason;Власна модель
+Refund;Фінансова операція повернення клієнту коштів за покупку;BusinessEvent;amount currency refund_date;Власна модель
+Agent;Сутність яка виконує дії або бере участь у подіях предметної області;KnowledgeEntity;identifier name;Узагальнений клас
+KnowledgeEntity;Сутність предметної області що має описані властивості та зв'язки;TopLevelEntity;identifier name;Власна модель

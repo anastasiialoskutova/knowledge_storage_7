@@ -1,0 +1,7 @@
+# CQ-03: Вивести товари разом з їхніми брендами
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?productName ?brandLabel WHERE {
+    ?product :productName ?productName ;
+             :hasBrand ?brand .
+    ?brand rdfs:label ?brandLabel .
+}

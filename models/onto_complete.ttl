@@ -1,0 +1,728 @@
+@prefix : <http://example.org/ecommerce-recommendations#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/ecommerce-recommendations> a owl:Ontology ;
+    rdfs:label "E-commerce Recommendation Ontology"@en,
+        "Онтологія рекомендацій для електронної комерції"@uk ;
+    rdfs:comment "Ontology of customers, products, purchases, financial transactions and personalized recommendations."@en ;
+    owl:versionInfo "1.0" .
+
+:CartItem a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:ProductClick a owl:Class ;
+    rdfs:subClassOf :UserInteraction .
+
+:ProductView a owl:Class ;
+    rdfs:subClassOf :UserInteraction ;
+    skos:closeMatch schema:ViewAction .
+
+:RecommendationList a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:SimilarityScore a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:assignedToSegment a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :CustomerSegment .
+
+:currency a owl:DatatypeProperty ;
+    rdfs:domain :Price ;
+    rdfs:range xsd:string .
+
+:customerId a owl:DatatypeProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:discountPercent a owl:DatatypeProperty ;
+    rdfs:domain :Discount ;
+    rdfs:range xsd:decimal .
+
+:email a owl:DatatypeProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:generatedFor a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :Customer .
+
+:hasAttribute a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :ProductAttribute .
+
+:hasBehaviorFeature a owl:ObjectProperty ;
+    rdfs:domain :CustomerProfile ;
+    rdfs:range :BehaviorFeature .
+
+:hasBrand a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :Brand .
+
+:hasDiscount a owl:ObjectProperty ;
+    rdfs:domain :Offer ;
+    rdfs:range :Discount .
+
+:hasInventory a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :Inventory .
+
+:hasOffer a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :Offer .
+
+:hasParentCategory a owl:ObjectProperty,
+        owl:TransitiveProperty ;
+    rdfs:domain :ProductCategory ;
+    rdfs:range :ProductCategory ;
+    owl:inverseOf :hasChildCategory .
+
+:hasPrice a owl:ObjectProperty ;
+    rdfs:domain :Offer ;
+    rdfs:range :Price .
+
+:hasPurchaseHistory a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :PurchaseHistory .
+
+:hasRating a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :ProductRating .
+
+:hasRelevanceScore a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :RelevanceScore .
+
+:interactionTarget a owl:ObjectProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range :Product .
+
+:interactionTime a owl:DatatypeProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range xsd:dateTime .
+
+:interactionType a owl:DatatypeProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range xsd:string .
+
+:modelVersion a owl:DatatypeProperty ;
+    rdfs:domain :RecommendationModel ;
+    rdfs:range xsd:string .
+
+:paidBy a owl:ObjectProperty ;
+    rdfs:domain :Order ;
+    rdfs:range :Payment .
+
+:performedBy a owl:ObjectProperty ;
+    rdfs:domain :UserInteraction ;
+    rdfs:range :Customer .
+
+:placedOrder a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :Order .
+
+:priceAmount a owl:DatatypeProperty ;
+    rdfs:domain :Price ;
+    rdfs:range xsd:decimal .
+
+:producedByModel a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :RecommendationModel .
+
+:productId a owl:DatatypeProperty ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:productName a owl:DatatypeProperty ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:purchasedProduct a owl:ObjectProperty ;
+    rdfs:domain :PurchaseItem ;
+    rdfs:range :Product .
+
+:quantity a owl:DatatypeProperty ;
+    rdfs:domain :PurchaseItem ;
+    rdfs:range xsd:integer .
+
+:ratingValue a owl:DatatypeProperty ;
+    rdfs:domain :ProductRating ;
+    rdfs:range xsd:decimal .
+
+:recommendation01 a :Recommendation ;
+    rdfs:label "Recommendation 01"@en ;
+    :generatedFor :customer01 ;
+    :hasRelevanceScore :score01 ;
+    :producedByModel :model01 ;
+    :recommendationScore 0.95 ;
+    :recommendsProduct :product02 .
+
+:recommendation02 a :Recommendation ;
+    rdfs:label "Recommendation 02"@en ;
+    :generatedFor :customer02 ;
+    :hasRelevanceScore :score02 ;
+    :producedByModel :model01 ;
+    :recommendationScore 0.91 ;
+    :recommendsProduct :product01 .
+
+:recommendation03 a :Recommendation ;
+    rdfs:label "Recommendation 03"@en ;
+    :generatedFor :customer03 ;
+    :hasRelevanceScore :score03 ;
+    :producedByModel :model01 ;
+    :recommendationScore 0.87 ;
+    :recommendsProduct :product03 .
+
+:recommendation04 a :Recommendation ;
+    rdfs:label "Recommendation 04"@en ;
+    :generatedFor :customer04 ;
+    :hasRelevanceScore :score04 ;
+    :producedByModel :model01 ;
+    :recommendationScore 0.89 ;
+    :recommendsProduct :product04 .
+
+:recommendation05 a :Recommendation ;
+    rdfs:label "Recommendation 05"@en ;
+    :generatedFor :customer05 ;
+    :hasRelevanceScore :score05 ;
+    :producedByModel :model01 ;
+    :recommendationScore 0.84 ;
+    :recommendsProduct :product05 .
+
+:recommendationScore a owl:DatatypeProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range xsd:decimal .
+
+:refundAmount a owl:DatatypeProperty ;
+    rdfs:domain :Refund ;
+    rdfs:range xsd:decimal .
+
+:registrationDate a owl:DatatypeProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:date .
+
+:resultedInRefund a owl:ObjectProperty ;
+    rdfs:domain :Return ;
+    rdfs:range :Refund .
+
+:savedProduct a owl:ObjectProperty ;
+    rdfs:domain :Wishlist ;
+    rdfs:range :Product .
+
+:sessionEnd a owl:DatatypeProperty ;
+    rdfs:domain :Session ;
+    rdfs:range xsd:dateTime .
+
+:sessionStart a owl:DatatypeProperty ;
+    rdfs:domain :Session ;
+    rdfs:range xsd:dateTime .
+
+:stockQuantity a owl:DatatypeProperty ;
+    rdfs:domain :Inventory ;
+    rdfs:range xsd:integer .
+
+:usesPaymentMethod a owl:ObjectProperty ;
+    rdfs:domain :Payment ;
+    rdfs:range :PaymentMethod .
+
+:writtenBy a owl:ObjectProperty ;
+    rdfs:domain :ProductReview ;
+    rdfs:range :Customer .
+
+:Agent a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:CommercialEntity a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:PaymentMethod a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:ProductAttribute a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:Return a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+
+:ShoppingCart a owl:Class ;
+    rdfs:subClassOf :CustomerActivity .
+
+:TopLevelEntity a owl:Class .
+
+:belongsToCategory a owl:ObjectProperty ;
+    rdfs:domain :Product ;
+    rdfs:range :ProductCategory .
+
+:brand02 a :Brand ;
+    rdfs:label "HomePlus"@en .
+
+:brand03 a :Brand ;
+    rdfs:label "StyleWorks"@en .
+
+:category02 a :ProductCategory ;
+    rdfs:label "Home and lifestyle"@en ;
+    :hasParentCategory :category01 .
+
+:category03 a :ProductCategory ;
+    rdfs:label "Accessories"@en ;
+    :hasParentCategory :category01 .
+
+:containsItem a owl:ObjectProperty ;
+    rdfs:domain :Purchase ;
+    rdfs:range :PurchaseItem ;
+    owl:inverseOf :partOfPurchase .
+
+:customer01 a :Customer ;
+    rdfs:label "Customer 01"@en ;
+    :assignedToSegment :segment01 ;
+    :customerId "C001" ;
+    :email "customer01@example.com" ;
+    :hasProfile :profile01 ;
+    :hasPurchaseHistory :history01 ;
+    :registrationDate "2025-01-10"^^xsd:date .
+
+:customer02 a :Customer ;
+    rdfs:label "Customer 02"@en ;
+    :assignedToSegment :segment02 ;
+    :customerId "C002" ;
+    :email "customer02@example.com" ;
+    :hasProfile :profile02 ;
+    :hasPurchaseHistory :history02 ;
+    :registrationDate "2025-02-15"^^xsd:date .
+
+:customer03 a :Customer ;
+    rdfs:label "Customer 03"@en ;
+    :assignedToSegment :segment03 ;
+    :customerId "C003" ;
+    :email "customer03@example.com" ;
+    :hasProfile :profile03 ;
+    :hasPurchaseHistory :history03 ;
+    :registrationDate "2025-03-20"^^xsd:date .
+
+:customer04 a :Customer ;
+    rdfs:label "Customer 04"@en ;
+    :assignedToSegment :segment04 ;
+    :customerId "C004" ;
+    :email "customer04@example.com" ;
+    :hasProfile :profile04 ;
+    :hasPurchaseHistory :history04 ;
+    :registrationDate "2025-04-05"^^xsd:date .
+
+:customer05 a :Customer ;
+    rdfs:label "Customer 05"@en ;
+    :assignedToSegment :segment05 ;
+    :customerId "C005" ;
+    :email "customer05@example.com" ;
+    :hasProfile :profile05 ;
+    :hasPurchaseHistory :history05 ;
+    :registrationDate "2025-05-12"^^xsd:date .
+
+:hasChildCategory a owl:ObjectProperty ;
+    rdfs:domain :ProductCategory ;
+    rdfs:range :ProductCategory .
+
+:history01 a :PurchaseHistory ;
+    rdfs:label "Purchase history 01"@en .
+
+:history02 a :PurchaseHistory ;
+    rdfs:label "Purchase history 02"@en .
+
+:history03 a :PurchaseHistory ;
+    rdfs:label "Purchase history 03"@en .
+
+:history04 a :PurchaseHistory ;
+    rdfs:label "Purchase history 04"@en .
+
+:history05 a :PurchaseHistory ;
+    rdfs:label "Purchase history 05"@en .
+
+:inventory01 a :Inventory ;
+    rdfs:label "Headphones inventory"@en ;
+    :stockQuantity 25 .
+
+:inventory02 a :Inventory ;
+    rdfs:label "Smart watch inventory"@en ;
+    :stockQuantity 12 .
+
+:inventory03 a :Inventory ;
+    rdfs:label "Desk lamp inventory"@en ;
+    :stockQuantity 40 .
+
+:inventory04 a :Inventory ;
+    rdfs:label "Backpack inventory"@en ;
+    :stockQuantity 18 .
+
+:inventory05 a :Inventory ;
+    rdfs:label "Speaker inventory"@en ;
+    :stockQuantity 30 .
+
+:item01 a :PurchaseItem ;
+    rdfs:label "Purchase item 01"@en ;
+    :partOfPurchase :purchase01 ;
+    :purchasedProduct :product01 ;
+    :quantity 1 .
+
+:item02 a :PurchaseItem ;
+    rdfs:label "Purchase item 02"@en ;
+    :partOfPurchase :purchase02 ;
+    :purchasedProduct :product02 ;
+    :quantity 1 .
+
+:item03 a :PurchaseItem ;
+    rdfs:label "Purchase item 03"@en ;
+    :partOfPurchase :purchase03 ;
+    :purchasedProduct :product03 ;
+    :quantity 2 .
+
+:item04 a :PurchaseItem ;
+    rdfs:label "Purchase item 04"@en ;
+    :partOfPurchase :purchase04 ;
+    :purchasedProduct :product04 ;
+    :quantity 1 .
+
+:item05 a :PurchaseItem ;
+    rdfs:label "Purchase item 05"@en ;
+    :partOfPurchase :purchase05 ;
+    :purchasedProduct :product05 ;
+    :quantity 1 .
+
+:offer01 a :Offer ;
+    rdfs:label "Offer for headphones"@en ;
+    :hasPrice :price01 .
+
+:offer02 a :Offer ;
+    rdfs:label "Offer for smart watch"@en ;
+    :hasPrice :price02 .
+
+:offer03 a :Offer ;
+    rdfs:label "Offer for desk lamp"@en ;
+    :hasPrice :price03 .
+
+:offer04 a :Offer ;
+    rdfs:label "Offer for backpack"@en ;
+    :hasPrice :price04 .
+
+:offer05 a :Offer ;
+    rdfs:label "Offer for speaker"@en ;
+    :hasPrice :price05 .
+
+:partOfPurchase a owl:ObjectProperty ;
+    rdfs:domain :PurchaseItem ;
+    rdfs:range :Purchase .
+
+:price01 a :Price ;
+    rdfs:label "Price 01"@en ;
+    :currency "USD" ;
+    :priceAmount 79.99 .
+
+:price02 a :Price ;
+    rdfs:label "Price 02"@en ;
+    :currency "USD" ;
+    :priceAmount 129.99 .
+
+:price03 a :Price ;
+    rdfs:label "Price 03"@en ;
+    :currency "USD" ;
+    :priceAmount 34.50 .
+
+:price04 a :Price ;
+    rdfs:label "Price 04"@en ;
+    :currency "USD" ;
+    :priceAmount 49.00 .
+
+:price05 a :Price ;
+    rdfs:label "Price 05"@en ;
+    :currency "USD" ;
+    :priceAmount 59.99 .
+
+:profile01 a :CustomerProfile ;
+    rdfs:label "Profile 01"@en ;
+    :hasBehaviorFeature :feature01,
+        :feature02 .
+
+:profile02 a :CustomerProfile ;
+    rdfs:label "Profile 02"@en ;
+    :hasBehaviorFeature :feature02,
+        :feature03 .
+
+:profile03 a :CustomerProfile ;
+    rdfs:label "Profile 03"@en ;
+    :hasBehaviorFeature :feature03,
+        :feature04 .
+
+:profile04 a :CustomerProfile ;
+    rdfs:label "Profile 04"@en ;
+    :hasBehaviorFeature :feature04,
+        :feature05 .
+
+:profile05 a :CustomerProfile ;
+    rdfs:label "Profile 05"@en ;
+    :hasBehaviorFeature :feature01,
+        :feature05 .
+
+:purchase01 a :Purchase ;
+    rdfs:label "Purchase 01"@en ;
+    :containsItem :item01 .
+
+:purchase02 a :Purchase ;
+    rdfs:label "Purchase 02"@en ;
+    :containsItem :item02 .
+
+:purchase03 a :Purchase ;
+    rdfs:label "Purchase 03"@en ;
+    :containsItem :item03 .
+
+:purchase04 a :Purchase ;
+    rdfs:label "Purchase 04"@en ;
+    :containsItem :item04 .
+
+:purchase05 a :Purchase ;
+    rdfs:label "Purchase 05"@en ;
+    :containsItem :item05 .
+
+:score01 a :RelevanceScore ;
+    rdfs:label "Relevance score 01"@en .
+
+:score02 a :RelevanceScore ;
+    rdfs:label "Relevance score 02"@en .
+
+:score03 a :RelevanceScore ;
+    rdfs:label "Relevance score 03"@en .
+
+:score04 a :RelevanceScore ;
+    rdfs:label "Relevance score 04"@en .
+
+:score05 a :RelevanceScore ;
+    rdfs:label "Relevance score 05"@en .
+
+:segment01 a :CustomerSegment ;
+    rdfs:label "Frequent buyers"@en .
+
+:segment02 a :CustomerSegment ;
+    rdfs:label "Technology shoppers"@en .
+
+:segment03 a :CustomerSegment ;
+    rdfs:label "Budget shoppers"@en .
+
+:segment04 a :CustomerSegment ;
+    rdfs:label "Fashion shoppers"@en .
+
+:segment05 a :CustomerSegment ;
+    rdfs:label "New customers"@en .
+
+:CatalogEntity a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:CustomerActivity a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+
+:Discount a owl:Class ;
+    rdfs:subClassOf :FinancialValue .
+
+:FinancialValue a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:ProductReview a owl:Class ;
+    rdfs:subClassOf :UserFeedback ;
+    skos:closeMatch schema:Review .
+
+:Refund a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+
+:UserFeedback a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+
+:Wishlist a owl:Class ;
+    rdfs:subClassOf :CustomerActivity .
+
+:feature01 a :BehaviorFeature ;
+    rdfs:label "Frequently views products"@en .
+
+:feature02 a :BehaviorFeature ;
+    rdfs:label "Often purchases electronics"@en .
+
+:feature03 a :BehaviorFeature ;
+    rdfs:label "Prefers discounted products"@en .
+
+:feature04 a :BehaviorFeature ;
+    rdfs:label "Frequently uses search"@en .
+
+:feature05 a :BehaviorFeature ;
+    rdfs:label "Returns to viewed products"@en .
+
+:hasProfile a owl:ObjectProperty ;
+    rdfs:domain :Customer ;
+    rdfs:range :CustomerProfile .
+
+:product01 a :Product ;
+    rdfs:label "Wireless headphones"@en ;
+    :belongsToCategory :category01 ;
+    :hasBrand :brand01 ;
+    :hasInventory :inventory01 ;
+    :hasOffer :offer01 ;
+    :productId "P001" ;
+    :productName "Wireless headphones" .
+
+:product02 a :Product ;
+    rdfs:label "Smart watch"@en ;
+    :belongsToCategory :category01 ;
+    :hasBrand :brand01 ;
+    :hasInventory :inventory02 ;
+    :hasOffer :offer02 ;
+    :productId "P002" ;
+    :productName "Smart watch" .
+
+:product03 a :Product ;
+    rdfs:label "Desk lamp"@en ;
+    :belongsToCategory :category02 ;
+    :hasBrand :brand02 ;
+    :hasInventory :inventory03 ;
+    :hasOffer :offer03 ;
+    :productId "P003" ;
+    :productName "Desk lamp" .
+
+:product04 a :Product ;
+    rdfs:label "Backpack"@en ;
+    :belongsToCategory :category03 ;
+    :hasBrand :brand03 ;
+    :hasInventory :inventory04 ;
+    :hasOffer :offer04 ;
+    :productId "P004" ;
+    :productName "Backpack" .
+
+:product05 a :Product ;
+    rdfs:label "Portable speaker"@en ;
+    :belongsToCategory :category01 ;
+    :hasBrand :brand01 ;
+    :hasInventory :inventory05 ;
+    :hasOffer :offer05 ;
+    :productId "P005" ;
+    :productName "Portable speaker" .
+
+:Order a owl:Class ;
+    rdfs:subClassOf :BusinessEvent ;
+    skos:closeMatch schema:Order .
+
+:Payment a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+
+:ProductRating a owl:Class ;
+    rdfs:subClassOf :UserFeedback ;
+    skos:closeMatch schema:Rating .
+
+:Session a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:brand01 a :Brand ;
+    rdfs:label "TechNova"@en .
+
+:recommendsProduct a owl:ObjectProperty ;
+    rdfs:domain :Recommendation ;
+    rdfs:range :Product .
+
+:RecommendationModel a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:Brand a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity ;
+    skos:closeMatch schema:Brand .
+
+:category01 a :ProductCategory ;
+    rdfs:label "Electronics"@en .
+
+:model01 a :RecommendationModel ;
+    rdfs:label "Personalized recommendation model"@en ;
+    :modelVersion "1.0" .
+
+:BehaviorFeature a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:CustomerSegment a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:RelevanceScore a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:Inventory a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:PurchaseHistory a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:UserInteraction a owl:Class ;
+    rdfs:subClassOf :BusinessEvent .
+
+:BusinessEvent a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:Offer a owl:Class ;
+    rdfs:subClassOf :CommercialEntity ;
+    skos:closeMatch schema:Offer .
+
+:Price a owl:Class ;
+    rdfs:subClassOf :FinancialValue .
+
+:Purchase a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :containsItem ;
+            owl:someValuesFrom :PurchaseItem ],
+        :BusinessEvent .
+
+:CustomerProfile a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:ProductCategory a owl:Class ;
+    rdfs:subClassOf :CatalogEntity ;
+    skos:closeMatch schema:CategoryCode .
+
+:PurchaseItem a owl:Class ;
+    rdfs:subClassOf :KnowledgeEntity .
+
+:Recommendation a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :recommendsProduct ;
+            owl:someValuesFrom :Product ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :Product ;
+            owl:onProperty :recommendsProduct ],
+        [ a owl:Restriction ;
+            owl:onClass :Product ;
+            owl:onProperty :recommendsProduct ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        :KnowledgeEntity .
+
+:Customer a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :hasProfile ;
+            owl:someValuesFrom :CustomerProfile ],
+        [ a owl:Restriction ;
+            owl:onClass :CustomerProfile ;
+            owl:onProperty :hasProfile ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        :Agent .
+
+:KnowledgeEntity a owl:Class ;
+    rdfs:subClassOf :TopLevelEntity .
+
+:Product a owl:Class ;
+    rdfs:seeAlso schema:Product ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :ProductCategory ;
+            owl:onProperty :belongsToCategory ],
+        :CatalogEntity ;
+    skos:closeMatch schema:Product .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( :Customer :Product :ProductCategory :Brand :Recommendation :RecommendationModel ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( :CustomerProfile :PurchaseHistory :ShoppingCart :Wishlist :Session ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( :Purchase :Order :Payment :UserInteraction :ProductReview :ProductRating ) .
+

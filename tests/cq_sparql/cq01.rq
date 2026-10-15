@@ -1,0 +1,7 @@
+# CQ-01: Знайти всіх клієнтів з їхніми ID та датою реєстрації
+PREFIX : <http://example.org/ecommerce-recommendations#>
+SELECT ?customer ?customerId ?email WHERE {
+    ?customer a :Customer ;
+              :customerId ?customerId ;
+              :email ?email .
+}
